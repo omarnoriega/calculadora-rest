@@ -14,7 +14,7 @@ import javax.ws.rs.Produces;
  * @author omarnoriega
  */
 
-@Path("v1")
+@Path("calculator")
 public class operations {
 
     /**

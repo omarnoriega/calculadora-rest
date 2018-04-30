@@ -10,7 +10,7 @@ import javax.ws.rs.core.Application;
  *
  * @author omarnoriega
  */
-@ApplicationPath("api")
+@ApplicationPath("v1")
 public class conf  extends Application {
     
 }
