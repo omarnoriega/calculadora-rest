@@ -22,7 +22,6 @@ public static String main( String path, String operation )
     
         switch (operation) {
             case "add":
-          
             n = n + Integer.valueOf(retval);
             break;
              case "subs":
