@@ -12,14 +12,16 @@
  * @author omarnoriega
  */
 public class calc {
-
-public static String main( String path, String operation )
+ 
+    
+    public static String main( String path, String operation )
 {
     float n = 0;
     int n3 =1;
     float n4 =1;
+    String action = null;
     for (String retval: path.split("/")) {
-    
+        action = operation;
         switch (operation) {
             case "add":
             n = n + Integer.valueOf(retval);
@@ -36,7 +38,7 @@ public static String main( String path, String operation )
                 n = n4;
                 break;
             default: 
-                operation = "Función "+operation+" no existe";
+                operation = "Función "+action+" no existe";
                 n =0;
                         }
         } 
@@ -44,3 +46,4 @@ public static String main( String path, String operation )
     return operation +" "+ String.valueOf(n);
 }
 }
+    
