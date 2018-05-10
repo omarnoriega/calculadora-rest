@@ -1,0 +1,99 @@
+#%RAML 0.8
+title: cancionero API
+version: v1
+baseUri: http://localhost:7001/api/{version}/
+mediaType: application/json
+/canciones:
+  get:
+    description: obtiene todas las canciones del catálogo
+    queryParameters:
+      autor:
+        description: autor o intérprete del tema
+      genero:
+        description: genero musical (rock, jazz, funk, etc.)
+    responses:
+      200:
+        body:
+          schema: |
+            { "$schema": "http://json-schema.org/draft-03/schema",
+              "type": "array",
+              "description": "canciones",
+              "items": 
+                {
+                  "type": "object",  
+                  "properties": {
+                    "id": { "type": "integer" },
+                    "titulo": { "type": "string"},
+                    "autor": { "type": "string"},
+                    "genero": { "type": "string" },
+                    "duracion":{ "type": "number" }
+                }
+              }
+            }
+          example: |
+            [
+              {
+                 "id" : "1",
+                 "titulo": "Black Dog",
+                 "autor": "Pink Floyd",
+                 "genero": "Rock",
+                 "duracion": "4:54"
+              },
+              {
+                 "id" : "2",	      
+                 "titulo": "In the flesh",
+                 "autor": "Pink Floyd",
+                 "genero": "Rock",
+                 "duracion": "4:15"
+              },
+              {
+                 "id" : "3",
+                 "titulo": "Paraíso",
+                 "autor": "Spinetta y los socios del desierto",
+                 "genero": "Rock",
+                 "duracion": "5:21"
+              }
+            ]
+  post:
+    securedBy: [oauth_2_0]
+    body:
+      schema: |
+        { "$schema": "http://json-schema.org/draft-03/schema",
+          "type": "object",
+          "description": "canción",
+          "properties": 
+          {
+            "id": { "type": "integer" },
+            "titulo": { "type": "string"},
+            "autor": { "type": "string"},
+            "genero": { "type": "string" },
+            "duracion":{ "type": "number" }
+          }
+        }
+  /{id}:
+    get:
+      description: obtener los detalles de una canción por id
+      responses:
+        200:
+          body:
+            schema: |
+              { "$schema": "http://json-schema.org/draft-03/schema",
+                "type": "object",
+                "description": "canción",
+                "properties": 
+                {
+                  "id": { "type": "integer" },
+                  "titulo": { "type": "string"},
+                  "autor": { "type": "string"},
+                  "genero": { "type": "string" },
+                  "duracion":{ "type": "number" }
+                }
+              }
+    delete:
+      securedBy: [oauth_2_0]
+      description: borrar una canción por id
+      responses:
+        200:
+          description: la canción fue borrada
+        404:
+          description: no se encontró una canción con ese Id
